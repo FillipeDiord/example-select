@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { cars, nameCars } from "../mock/data";
@@ -6,9 +6,13 @@ import { cars, nameCars } from "../mock/data";
 export default function Index() {
   const [selectedCarColor, setSelectedCarColor] = useState("");
   const [filteredNameCars, setFilteredNameCars] = useState([]);
-  const [selectedCar, setSelectedCar] = useState();
+  const [selectedCarName, setSelectedCarName] = useState('');
 
-  function filterNameCarsByFirstLetter(selectedColor) {
+  useEffect(() => {
+    setSelectedCarName('');
+  }, [selectedCarColor]);
+
+  function filterNameCarsByFirstLetter(selectedColor: string) {
     const firstLetter = cars
       .find((car) => car.key === selectedColor)
       ?.value.charAt(0)
@@ -17,7 +21,8 @@ export default function Index() {
       const filteredCars = nameCars.filter((car) =>
         car.value.toLowerCase().startsWith(firstLetter)
       );
-      setFilteredNameCars(filteredCars as array);
+      setFilteredNameCars(filteredCars);
+      setSelectedCarName(null);
     }
   }
 
@@ -35,16 +40,17 @@ export default function Index() {
       <View>
         <SelectList
           data={cars}
-          setSelected={(color) => {
-            setSelectedCarColor(color);
-            filterNameCarsByFirstLetter(color);
-          }}
+          setSelected={(color: string) => setSelectedCarColor(color)}
+          onSelect={() => filterNameCarsByFirstLetter(selectedCarColor)}
           search={false}
         />
       </View>
 
       <View>
-        <SelectList data={filteredNameCars} setSelected={setSelectedCar} />
+        <SelectList
+          data={filteredNameCars}
+          setSelected={setSelectedCarName}
+        />
       </View>
     </View>
   );

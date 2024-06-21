@@ -1,14 +1,14 @@
 export const cars = [
   {
-    key: "GREEN",
-    value: "VERDE",
+    key: "ROXO",
+    value: "ROXO",
   },
   {
     key: "BLACK",
     value: "PRETO",
   },
   {
-    key: "RED",
+    key: "VERMELHO",
     value: "VERMELHO",
   },
 ];
@@ -16,7 +16,11 @@ export const cars = [
 export const nameCars = [
   {
     key: "1",
-    value: "V Santana"
+    value: "R Santana"
+  },
+  {
+    key: "1",
+    value: "R NEW BEATLE"
   },
   {
     key: "2",
@@ -24,7 +28,7 @@ export const nameCars = [
   },
   {
     key: "3",
-    value: "R Ferrari"
+    value: "V Ferrari"
   },
   {
     key: "4",
